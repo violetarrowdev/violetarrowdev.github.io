@@ -1,8 +1,14 @@
-var consoleManager = null;
+import Console from "./Console";
 
+var consoleManager: ConsoleManager | null = null;
+
+/**
+ * Singleton class that handles animating console windows in the order they mount to the window.
+ */
 export class ConsoleManager {
+    consoleQueue: Array<Console>;
 
-    constructor(consoleQueue = null) {
+    constructor(consoleQueue: Array<Console> | null = null) {
         if (consoleQueue === null) {
             this.consoleQueue = []
         } else {
@@ -10,32 +16,27 @@ export class ConsoleManager {
         }
     }
 
-    static getInstance() {
+    static getInstance(): ConsoleManager {
         if (consoleManager === null) {
             consoleManager = new ConsoleManager();
-            console.log("Instance created");
         }
-        console.log("Instance retrieved");
         return consoleManager;
     }
 
-    add(newConsole) {
+    add(newConsole: Console): void {
         this.consoleQueue.push(newConsole);
-        console.log("Added console!")
-        console.log(this.consoleQueue);
-        if (this.consoleQueue.length == 1) {
+        if (this.consoleQueue.length === 1) {
             this.executeNext();
         }
     }
 
-    clearLast() {
+    clearLast(): void {
         this.consoleQueue = this.consoleQueue.slice(1);
-        console.log("Cleared previous console");
         this.executeNext();
     }
 
-    executeNext() {
-        if (this.consoleQueue.length != 0) {
+    executeNext(): void {
+        if (this.consoleQueue.length !== 0) {
             let delayInterval = 1000;
             setTimeout(() => {
                         this.consoleQueue[0].animateText();
