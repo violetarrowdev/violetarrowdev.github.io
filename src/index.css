@@ -7,8 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
+p, li {
   margin: 2em 2em;
+}
+
+ul {
+  list-style: none;
 }
 
 code {
@@ -22,12 +26,9 @@ h1 {
 }
 
 .banner {
+  margin: 0;
   display: block;
   padding: 1% 2em;
   background-color: #27182D;
   align-content: center;
-}
-
-.console {
-  
 }

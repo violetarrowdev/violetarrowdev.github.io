@@ -10,8 +10,14 @@ function App() {
       <header><Banner /></header>
       <body>
         <p>
-          <Console fullText="testing!" useFlasher={false} />
+          <Console fullText="Select a file or directory to proceed:" />
         </p>
+        <ul>
+          <li><Console fullText="> projects/" /></li>
+          <li><Console fullText="> personal/" /></li>
+          <li><Console fullText="> misc/" /></li>
+          <li><Console fullText="> license.txt" /></li>
+        </ul>
       </body>
     </div>
   );

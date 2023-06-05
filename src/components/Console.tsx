@@ -11,7 +11,7 @@ interface ConsoleState {
 }
 
 interface ConsoleProps {
-    useFlasher: boolean | undefined,
+    useFlasher?: boolean,
     fullText: string
 }
 
