@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: NSimSun;
+  font-family: NSimSun, 'Courier New';
   color: #D57CFF;
   background-color: black;
   -webkit-font-smoothing: antialiased;
@@ -8,7 +8,7 @@ body {
 }
 
 p {
-  padding: 1% 1%;
+  margin: 2em 2em;
 }
 
 code {
