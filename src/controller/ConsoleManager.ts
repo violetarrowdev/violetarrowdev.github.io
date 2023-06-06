@@ -1,5 +1,5 @@
-import Console from './Console';
-import * as Events from './Events';
+import { Console } from '../components/Exports';
+import * as Constants from '../util/Constants';
 
 var consoleManager: ConsoleManager | null = null;
 
@@ -27,7 +27,7 @@ export default class ConsoleManager {
             this.consoleQueue = consoleQueue
         }
 
-        window.addEventListener(Events.pageTransitionEvent, this.clearText.bind(this));
+        window.addEventListener(Constants.pageTransitionEvent, this.clearText.bind(this));
     }
 
     static getInstance(): ConsoleManager {
@@ -70,7 +70,7 @@ export default class ConsoleManager {
                     this.animationsInProgress--;
                     animCount--;
                     if (index === 0) {
-                        window.dispatchEvent(new Event(Events.consolesClearedEvent));
+                        window.dispatchEvent(new Event(Constants.consolesClearedEvent));
                         this.continueText();
                         return;
                     }
@@ -95,7 +95,7 @@ export default class ConsoleManager {
                     this.animationsInProgress--;
                     animCount--;
                 } else if (animCount > 0) {
-                    window.dispatchEvent(new Event(Events.pauseAnimationsEvent));
+                    window.dispatchEvent(new Event(Constants.pauseAnimationsEvent));
                 }
                 break;
             }

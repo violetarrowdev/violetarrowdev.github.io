@@ -1,12 +1,7 @@
-import Banner from './Banner';
-import Console from './Console';
-import * as Events from './Events';
+import { Console } from './Exports';
+import { Page, changePage } from '../util/Pages';
 
 export default function Projects() {
-
-    var clearPage = () => {
-        window.dispatchEvent(new Event(Events.pageTransitionEvent));
-    };
     
     return (
         <div>
@@ -14,9 +9,9 @@ export default function Projects() {
             <Console fullText="projects/" />
             </p>
             <ul>
-                <li><button type="button" onClick={clearPage} ><Console fullText="> .." /></button></li>
-                <li><Console fullText="> backlogger.txt" /></li>
-                <li><Console fullText="> redditfetcher.txt" /></li>
+                <li><button type="button" onClick={() => changePage(Page.Root)} ><Console fullText="> .." /></button></li>
+                <li><button type="button" onClick={() => changePage(Page.Projects)} ><Console fullText="> backlogger.txt" /></button></li>
+                <li><button type="button" onClick={() => changePage(Page.Projects)} ><Console fullText="> redditfetcher.txt" /></button></li>
             </ul>
         </div>
     )

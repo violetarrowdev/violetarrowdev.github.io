@@ -1,13 +1,12 @@
 import { Component } from 'react';
-import ConsoleManager from './ConsoleManager'
-import * as Events from './Events';
+import ConsoleManager from '../controller/ConsoleManager'
+import * as Constants from '../util/Constants';
 import PropTypes from 'prop-types';
 
 interface ConsoleState {
     text: string,
     index: number,
     flasher: FlasherState,
-    pauseListener: Function | null
 }
 
 interface ConsoleProps {
@@ -18,6 +17,7 @@ interface ConsoleProps {
     dontClear?: boolean,
     textInterval?: number,
     flasherInterval?: number,
+    swipeInterval?: number,
     fullText: string
 }
 
@@ -35,10 +35,14 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     private textLoop: NodeJS.Timer | null = null;
     private flasherLoop: NodeJS.Timer | null = null;
     private queueLoc: number = -1;
+    private pauseListener = () => {
+        this.stopTextAnimation();
+    };
 
     static defaultProps = {
         textInterval: 40,
-        flasherInterval: 600
+        flasherInterval: 600,
+        swipeInterval: 20,
     }
 
     static propTypes = {
@@ -46,6 +50,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         dontClear: PropTypes.bool,
         textInterval: PropTypes.number.isRequired,
         flasherInterval: PropTypes.number.isRequired,
+        swipeInterval: PropTypes.number.isRequired,
         fullText: PropTypes.string.isRequired
     };
 
@@ -53,7 +58,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         text: "",
         index: 0,
         flasher: FlasherState.None,
-        pauseListener: null
     }
 
     /**
@@ -98,7 +102,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
             }
             
             this.textLoop = setInterval(animation, this.props.textInterval);
-            this.activateListener();
             return true;
         } else {
             return false;
@@ -110,7 +113,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
      */
     swipeText(): boolean {
         if (!this.props.dontClear && !this.isAnimating()) {
-            let swipeInterval = 30
             const animation = () => {
                 if (this.state.index > 0) {
                     this.setState({
@@ -122,8 +124,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
                 }
             }
 
-            this.textLoop = setInterval(animation, swipeInterval)
-            this.activateListener();
+            this.textLoop = setInterval(animation, this.props.swipeInterval)
             return true;
         } else {
             return false;
@@ -139,7 +140,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
             this.textLoop = null;
             ConsoleManager.getInstance().proceed(this);
         }
-        this.removeListener();
     }
 
     stopFlasher() {
@@ -152,23 +152,12 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         }
     }
 
-    activateListener() {
-        var listener = () => {
-            this.stopTextAnimation();
-        };
-        this.setState({
-            pauseListener: listener,
-        })
-        window.addEventListener(Events.pauseAnimationsEvent, listener);
+    private activateListener() {
+        window.addEventListener(Constants.pauseAnimationsEvent, this.pauseListener);
     }
 
-    removeListener() {
-        if (this.state.pauseListener !== null) {
-            window.removeEventListener(Events.pauseAnimationsEvent, this.state.pauseListener)
-        }
-        this.setState({
-            pauseListener: null
-        })
+    private removeListener() {
+        window.removeEventListener(Constants.pauseAnimationsEvent, this.pauseListener)
     }
 
     updateLoc(offset: number) {
@@ -178,6 +167,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     componentDidMount() {
         this.queueLoc = ConsoleManager.getInstance().add(this)
         this.animateFlasher();
+        this.activateListener();
     }
 
     componentWillUnmount() {
