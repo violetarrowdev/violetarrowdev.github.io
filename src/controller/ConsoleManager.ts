@@ -195,14 +195,19 @@ export default class ConsoleManager {
         if (this.queueState !== QueueState.Forward) {
             console.error("Tried to animate text while ConsoleManager is doing something else. Oops!");
         } else {
-            let delayInterval = 300;
             let nextConsole: Console = this.consoleQueue[this.queueIndex];
-            this.delayedAnim = setTimeout(() => {
-                        if(!nextConsole.animateText()) {
-                            this.animationsInProgress--;
-                        }
-                        this.delayedAnim = null;
-            }, delayInterval);
+            let animation = () => {
+                if(!nextConsole.animateText()) {
+                    this.animationsInProgress--;
+                }
+                this.delayedAnim = null;
+            }
+            if (nextConsole.props.noDelay) {
+                animation()
+            } else {
+                let delayInterval = 300;
+                this.delayedAnim = setTimeout(animation, delayInterval);
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ interface ConsoleProps {
     textInterval?: number,
     flasherInterval?: number,
     swipeInterval?: number,
+    noDelay?: boolean,
     fullText: string
 }
 
@@ -51,6 +52,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         textInterval: PropTypes.number.isRequired,
         flasherInterval: PropTypes.number.isRequired,
         swipeInterval: PropTypes.number.isRequired,
+        noDelay: PropTypes.bool,
         fullText: PropTypes.string.isRequired
     };
 
