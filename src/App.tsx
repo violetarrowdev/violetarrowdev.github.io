@@ -1,34 +1,40 @@
 // import logo from './logo.svg';
 import './App.css';
-import Console from './components/Console'
+import Root from './components/Root';
+import { Pages } from './components/PagesEnum'
+import * as Events from './components/Events';
+import { useState } from 'react';
+import Projects from './components/Projects'
+import Banner from './components/Banner';
 // import { useEffect, useState } from 'react'
 
-function App() {
+export function App() {
 
-  return (
-    <div>
-      <header><Banner /></header>
+  const [page, setPage] = useState<Pages>(Pages.Root)
+
+  var switchPage = () => {
+    if (page === Pages.Root) {
+      setPage(Pages.Projects);
+    } else {
+      setPage(Pages.Root)
+    }
+  }
+
+  window.addEventListener(Events.consolesClearedEvent, switchPage)
+
+  if (page === Pages.Root) {
+    return (
       <body>
-        <p>
-          <Console fullText="Select a file or directory to proceed:" />
-        </p>
-        <ul>
-          <li><Console fullText="> projects/" /></li>
-          <li><Console fullText="> personal/" /></li>
-          <li><Console fullText="> misc/" /></li>
-          <li><Console fullText="> license.txt" /></li>
-        </ul>
+        <header><Banner /></header>
+        <Root />
       </body>
-    </div>
-  );
+    )
+  } else {
+    return ( 
+      <body>
+        <header><Banner /></header>
+        <Projects />
+      </body>
+    )
+  }
 }
-
-function Banner() {
-  return (
-    <div className="banner">
-      <h1>&gt; <Console fullText="VIOLET ARROW" useFlasher={true} /></h1>
-    </div>
-  )
-}
-
-export default App;
