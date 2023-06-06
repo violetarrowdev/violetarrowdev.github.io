@@ -2,7 +2,6 @@ import Console from './Console';
 import * as Events from './Events';
 
 var consoleManager: ConsoleManager | null = null;
-var debugVal: number = 0;
 
 enum QueueState {
     Forward,
@@ -40,13 +39,9 @@ export default class ConsoleManager {
 
     proceed(cons: Console | null = null): void {
         
-        let intDebugVal: number = debugVal++;
-        console.log("Op" + intDebugVal + " - Start index: " + this.queueIndex);
         let consoleDone: boolean = cons !== null;
-        // console.log("Completed animation: " + consoleDone);
         let queueSize: number = this.consoleQueue.length;
         let animCount: number = this.animationsInProgress
-        console.log("Op" + intDebugVal + " - Start anim count: " + animCount);
         let index: number = this.queueIndex
 
         switch (this.queueState) {
@@ -72,11 +67,9 @@ export default class ConsoleManager {
                 
 
                 if (consoleDone) {
-                    // console.log("Animations remaining: " + animCount)
                     this.animationsInProgress--;
                     animCount--;
                     if (index === 0) {
-                        console.log("Console cleared event!!!")
                         window.dispatchEvent(new Event(Events.consolesClearedEvent));
                         this.continueText();
                         return;
@@ -102,16 +95,12 @@ export default class ConsoleManager {
                     this.animationsInProgress--;
                     animCount--;
                 } else if (animCount > 0) {
-                    console.log("Dispatching pause event");
                     window.dispatchEvent(new Event(Events.pauseAnimationsEvent));
                 }
                 break;
             }
         }
 
-        console.log("Op" + intDebugVal + " - End index: " + this.queueIndex);
-        console.log("Op" + intDebugVal + " - End anim count: " + animCount);
-        console.log("Op" + intDebugVal + " - Console done: " + consoleDone);
     }
 
     continueText(): void {
@@ -137,7 +126,6 @@ export default class ConsoleManager {
         if (this.queueState === QueueState.Pause) {
             return;
         }
-        // console.log("Entering pause mode.");
         // let adjustIndex: boolean = this.queueState === QueueState.Forward;
         this.queueState = QueueState.Pause;
         if (this.delayedAnim !== null) {
@@ -153,14 +141,11 @@ export default class ConsoleManager {
     }
 
     clearText(): void {
-        // console.log("Initial call to clearText().");
-        // console.log(this.consoleQueue);
         switch (this.queueState) {
             case QueueState.Clear:
                 break;
             case QueueState.Forward:
                 this.pauseText();
-                console.log("Text scrolling successfully paused.")
                 this.waitForAnims(QueueState.Clear);
                 break;
             case QueueState.Pause:
@@ -197,11 +182,9 @@ export default class ConsoleManager {
                     this.continueText();
                     break;
                 case QueueState.Clear:
-                    console.log("Anims complete, switching to text clear mode.")
                     this.clearText();
             }
         } else {
-            console.log("Waiting for no anims to progress... Anims left: " + this.animationsInProgress)
             setTimeout(() => {
                 this.waitForAnims(targetState);
             }, 100)

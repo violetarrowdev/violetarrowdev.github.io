@@ -16,6 +16,8 @@ interface ConsoleProps {
      * Determines whether animations on this console object can be paused or reversed.
      */
     dontClear?: boolean,
+    textInterval?: number,
+    flasherInterval?: number,
     fullText: string
 }
 
@@ -34,9 +36,16 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     private flasherLoop: NodeJS.Timer | null = null;
     private queueLoc: number = -1;
 
+    static defaultProps = {
+        textInterval: 40,
+        flasherInterval: 600
+    }
+
     static propTypes = {
         useFlasher: PropTypes.bool,
         dontClear: PropTypes.bool,
+        textInterval: PropTypes.number.isRequired,
+        flasherInterval: PropTypes.number.isRequired,
         fullText: PropTypes.string.isRequired
     };
 
@@ -56,7 +65,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
             this.setState({
                 flasher: FlasherState.Off
             });
-            let flasherInterval = 600;
             let loop = setInterval(() => {
                 if (this.state.flasher === " ") {
                     this.setState({
@@ -67,7 +75,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
                         flasher: FlasherState.Off,
                     });
                 }
-            }, flasherInterval);
+            }, this.props.flasherInterval);
             // Add a reference to this loop
             this.flasherLoop = loop;
         }
@@ -78,7 +86,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
      */
     animateText(): boolean {
         if (this.textLoop === null) {
-            let textInterval = 40;
             const animation = () => {
                 if (!this.isDoneAnimating()) {
                     this.setState({
@@ -90,9 +97,8 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
                 }
             }
             
-            this.textLoop = setInterval(animation, textInterval);
+            this.textLoop = setInterval(animation, this.props.textInterval);
             this.activateListener();
-            console.log("Console " + this.queueLoc + " began animating.")
             return true;
         } else {
             return false;
@@ -117,12 +123,9 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
             }
 
             this.textLoop = setInterval(animation, swipeInterval)
-            console.log("Console " + this.queueLoc + " began clearing.")
             this.activateListener();
             return true;
         } else {
-            console.log("Console " + this.queueLoc + " has this textLoop: " + this.textLoop);
-            console.log("Console " + this.queueLoc + " refuses to swipe!")
             return false;
         }
     }
@@ -132,12 +135,9 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
      */
     stopTextAnimation(force: boolean = false) {
         if (this.textLoop !== null && (!this.props.dontClear || this.isDoneAnimating() || force)) {
-            console.log("Console " + this.queueLoc + " is clearing textLoop: " + this.textLoop);
             clearInterval(this.textLoop)
             this.textLoop = null;
-            console.log("Console " + this.queueLoc + " has new textLoop: " + this.textLoop);
             ConsoleManager.getInstance().proceed(this);
-            console.log("Console " + this.queueLoc + " stopped.")
         }
         this.removeListener();
     }
@@ -181,7 +181,6 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     }
 
     componentWillUnmount() {
-        console.log("Console " + this.queueLoc + " is unmounting!");
         ConsoleManager.getInstance().remove(this.queueLoc);
         this.removeListener();
         this.stopTextAnimation(true);
