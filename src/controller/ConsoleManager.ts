@@ -16,7 +16,7 @@ enum QueueState {
 export default class ConsoleManager {
     private consoleQueue: Array<Console>;
     private queueIndex: number = 0;
-    private queueState: QueueState = QueueState.Forward;
+    private queueState: QueueState = QueueState.Pause;
     private animationsInProgress: number = 0;
     private delayedAnim: NodeJS.Timer | null = null;
 
@@ -28,6 +28,9 @@ export default class ConsoleManager {
         }
 
         window.addEventListener(Constants.pageTransitionEvent, this.clearText.bind(this));
+        window.addEventListener("load", () => {
+            setTimeout(() => this.continueText(), 1000);
+        });
     }
 
     static getInstance(): ConsoleManager {

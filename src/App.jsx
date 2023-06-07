@@ -1,9 +1,11 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Root, License, Personal, Projects, Banner } from './components/Exports';
+import { Root, License, Personal, Projects, Banner, Backlogger, RedditFetcher, AboutMe } from './components/Exports';
 import { Page } from './util/Pages'
 import * as Constants from './util/Constants';
 import { useState } from 'react';
+
+// TODO: Convert this back to .tsx (requires some custom event class jank)
 
 export function App() {
 
@@ -31,6 +33,12 @@ export function App() {
         return(<Projects />);
       case Page.Personal:
         return(<Personal />);
+      case Page.Backlogger:
+        return(<Backlogger />);
+      case Page.RedditFetcher:
+        return(<RedditFetcher />);
+      case Page.AboutMe:
+        return(<AboutMe />);
       default:
         console.error("Page selected not found.");
         return;
@@ -39,8 +47,12 @@ export function App() {
    
   return (
     <body>
-      <header><Banner /></header>
-      {pageSelector()}
+      <div className="console">
+        <header><Banner /></header>
+        <div className="page">
+          {pageSelector()}
+        </div>
+      </div>
     </body>
   );
 }

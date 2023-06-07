@@ -4,6 +4,9 @@ import License from './License'
 import Personal from './Personal'
 import Projects from './Projects'
 import Root from './Root'
+import Backlogger from './Backlogger'
+import RedditFetcher from './RedditFetcher'
+import AboutMe from './AboutMe'
 
 export {
     Banner,
@@ -11,5 +14,8 @@ export {
     Personal,
     Projects,
     Root,
-    Console
+    Console,
+    Backlogger,
+    RedditFetcher,
+    AboutMe,
 }

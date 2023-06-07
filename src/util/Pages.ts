@@ -1,11 +1,14 @@
 import * as Constants from './Constants';
 
 export enum Page {
-    Root = "ROOTPAGE",
-    Projects = "PROJECTSPAGE",
-    Personal = "PERSONALPAGE",
-    Misc = "MISCPAGE",
-    License = "LICENSEPAGE"
+    Root,
+    Projects,
+    Personal,
+    Misc,
+    License,
+    Backlogger,
+    RedditFetcher,
+    AboutMe
 }
 
 export function changePage(pg: Page) {

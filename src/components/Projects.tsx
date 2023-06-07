@@ -9,9 +9,9 @@ export default function Projects() {
             <Console fullText="projects/" />
             </p>
             <ul>
+                <li><button type="button" onClick={() => changePage(Page.Backlogger)} ><Console fullText="> backlogger_api.txt" /></button></li>
+                <li><button type="button" onClick={() => changePage(Page.RedditFetcher)} ><Console fullText="> redditfetcher.txt" /></button></li>
                 <li><button type="button" onClick={() => changePage(Page.Root)} ><Console fullText="> .." /></button></li>
-                <li><button type="button" onClick={() => changePage(Page.Projects)} ><Console fullText="> backlogger.txt" /></button></li>
-                <li><button type="button" onClick={() => changePage(Page.Projects)} ><Console fullText="> redditfetcher.txt" /></button></li>
             </ul>
         </div>
     )
