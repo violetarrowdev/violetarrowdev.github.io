@@ -7,7 +7,7 @@ export default function License() {
         <div>
             <p><Console textInterval={5} swipeInterval={1} noDelay={true} fullText="MIT License" /></p>
 
-            <p><Console textInterval={5} swipeInterval={1} noDelay={true} fullText="Copyright (c) Meta Platforms, Inc. and affiliates." /></p>
+            <p><Console textInterval={5} swipeInterval={1} noDelay={true} fullText="Copyright (c) violetarrowdev" /></p>
             
             <p><Console textInterval={5} swipeInterval={1} noDelay={true} fullText='Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
