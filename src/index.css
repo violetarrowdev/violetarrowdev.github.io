@@ -62,6 +62,7 @@ h1 {
 
 .console {
   background-color: black;
+  display: block;
   height: 100vh;
   margin: 0 auto;
   animation: 1.0s ease-in-out 0.5s 1 sidebars;

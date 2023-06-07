@@ -28,9 +28,7 @@ export default class ConsoleManager {
         }
 
         window.addEventListener(Constants.pageTransitionEvent, this.clearText.bind(this));
-        window.addEventListener("load", () => {
-            setTimeout(() => this.continueText(), 1000);
-        });
+        setTimeout(() => this.continueText(), 1000);
     }
 
     static getInstance(): ConsoleManager {
