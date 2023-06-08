@@ -75,12 +75,12 @@ h1 {
   padding: 0.5em;
 }
 
-@media screen and ((max-width:35rem) or (max-height:35rem)) {
+@media screen and ((max-width:40rem) or (max-height:35rem)) {
   h1 {
     font-size: 2em;
   }
 
   .console {
-    min-height: 70em;
+    min-height: 80em;
   }
 }
