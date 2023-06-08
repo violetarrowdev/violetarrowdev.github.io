@@ -75,7 +75,7 @@ h1 {
   padding: 0.5em;
 }
 
-@media screen and ((max-width:40rem) or (max-height:40rem)) {
+@media screen and ((max-width:45rem) or (max-height:45rem)) {
   h1 {
     font-size: 2em;
   }
