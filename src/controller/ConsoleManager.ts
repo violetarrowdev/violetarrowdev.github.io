@@ -127,7 +127,6 @@ export default class ConsoleManager {
         if (this.queueState === QueueState.Pause) {
             return;
         }
-        // let adjustIndex: boolean = this.queueState === QueueState.Forward;
         this.queueState = QueueState.Pause;
         if (this.delayedAnim !== null) {
             clearTimeout(this.delayedAnim);
@@ -136,9 +135,6 @@ export default class ConsoleManager {
             this.queueIndex--;
         }
         this.proceed()
-        // if (adjustIndex && this.animationsInProgress > 0) {
-        //     this.queueIndex--;
-        // }
     }
 
     clearText(): void {

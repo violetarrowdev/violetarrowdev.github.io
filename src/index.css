@@ -64,6 +64,7 @@ h1 {
   background-color: black;
   display: block;
   height: 100vh;
+  min-height: 50em;
   margin: 0 auto;
   animation: 1.0s ease-in-out 0.5s 1 sidebars;
   animation-fill-mode: forwards;
