@@ -4,8 +4,6 @@ export enum Page {
     Root,
     Projects,
     Personal,
-    Misc,
-    License,
     Backlogger,
     RedditFetcher,
     AboutMe

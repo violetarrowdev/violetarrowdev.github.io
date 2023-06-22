@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Root, License, Personal, Projects, Banner, Backlogger, RedditFetcher, AboutMe } from './components/Exports';
+import { Root, Personal, Projects, Banner, Backlogger, RedditFetcher, AboutMe } from './components/Exports';
 import { Page } from './util/Pages'
 import * as Constants from './util/Constants';
 import { useState } from 'react';
@@ -27,8 +27,6 @@ export function App() {
     switch(activePage) {
       case Page.Root:
         return(<Root />);
-      case Page.License:
-        return(<License />);
       case Page.Projects:
         return(<Projects />);
       case Page.Personal:
