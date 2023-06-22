@@ -43,6 +43,10 @@ h1 {
   font-weight: normal;
 }
 
+a {
+  color: #8700c5;
+}
+
 .banner {
   margin: 0;
   display: block;
