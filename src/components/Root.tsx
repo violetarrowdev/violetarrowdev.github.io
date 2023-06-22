@@ -11,7 +11,6 @@ export default function Root() {
             <ul>
                 <li><button type="button" onClick={() => changePage(Page.Projects)}><Console fullText="> projects/" /></button></li>
                 <li><button type="button" onClick={() => changePage(Page.Personal)}><Console fullText="> personal/" /></button></li>
-                <li><button type="button" onClick={() => changePage(Page.License)}><Console fullText="> license.txt" /></button></li>
             </ul>
         </div>
     )
