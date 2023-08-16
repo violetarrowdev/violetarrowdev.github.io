@@ -67,12 +67,17 @@ a {
 .console {
   background-color: black;
   display: block;
-  height: 100vh;
-  min-height: 55em;
+  min-height: 100vh;
   min-width: 25em;
   margin: 0 auto;
   animation: 1.0s ease-in-out 0.5s 1 sidebars;
   animation-fill-mode: forwards;
+}
+
+.ascii {
+  font-size: 0.3vh;
+  white-space: pre;
+  line-height: 70%
 }
 
 .page {

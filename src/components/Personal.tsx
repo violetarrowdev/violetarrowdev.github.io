@@ -8,6 +8,7 @@ export default function Personal() {
 
             <ul>
                 <li><button type="button" onClick={() => changePage(Page.AboutMe)}><Console fullText="> aboutme.txt" /></button></li>
+                <li><button type="button" onClick={() => changePage(Page.Picture)} ><Console fullText="> picture.jpg" /></button></li>
                 <li><button type="button" onClick={() => changePage(Page.Root)} ><Console fullText="> .." /></button></li>
             </ul>
         </div>

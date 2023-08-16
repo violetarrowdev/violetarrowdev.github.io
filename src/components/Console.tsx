@@ -19,6 +19,8 @@ interface ConsoleProps {
     flasherInterval?: number,
     swipeInterval?: number,
     noDelay?: boolean,
+    isDynamic?: boolean,
+    charsPerLoop?: number,
     fullText: string
 }
 
@@ -53,6 +55,8 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         flasherInterval: PropTypes.number.isRequired,
         swipeInterval: PropTypes.number.isRequired,
         noDelay: PropTypes.bool,
+        isDynamic: PropTypes.bool,
+        charsPerLoop: PropTypes.number.isRequired,
         fullText: PropTypes.string.isRequired
     };
 
@@ -93,10 +97,17 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     animateText(): boolean {
         if (this.textLoop === null) {
             const animation = () => {
-                if (!this.isDoneAnimating()) {
+                let charCount: number = 1
+                if (this.props.charsPerLoop != undefined) {
+                    charCount = this.props.charsPerLoop
+                }
+                if (this.props.isDynamic && this.props.fullText == "") {
+                    return
+                } else if (!this.isDoneAnimating()) {
+                    let idx = this.state.index;
                     this.setState({
-                        text: this.state.text + this.props.fullText[this.state.index],
-                        index: this.state.index + 1,
+                        text: this.state.text + this.props.fullText.slice(idx, idx + charCount),
+                        index: Math.min(idx + charCount, this.props.fullText.length)
                     })
                 } else {
                     this.stopTextAnimation(true);
@@ -116,10 +127,15 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
     swipeText(): boolean {
         if (!this.props.dontClear && !this.isAnimating()) {
             const animation = () => {
+                let charCount: number = 1
+                if (this.props.charsPerLoop != undefined) {
+                    charCount = this.props.charsPerLoop
+                }
+
                 if (this.state.index > 0) {
                     this.setState({
-                        text: this.state.text.slice(0, -1),
-                        index: this.state.index - 1
+                        text: this.state.text.slice(0, -charCount),
+                        index: Math.max(this.state.index - charCount, 0)
                     });
                 } else {
                     this.stopTextAnimation(true);

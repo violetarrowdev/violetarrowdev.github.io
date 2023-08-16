@@ -6,7 +6,8 @@ export enum Page {
     Personal,
     Backlogger,
     RedditFetcher,
-    AboutMe
+    AboutMe,
+    Picture // temp
 }
 
 export function changePage(pg: Page) {

@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Root, Personal, Projects, Banner, Backlogger, RedditFetcher, AboutMe } from './components/Exports';
+import { Root, Personal, Projects, Banner, Backlogger, RedditFetcher, AboutMe, Picture } from './components/Exports';
 import { Page } from './util/Pages'
 import * as Constants from './util/Constants';
 import { useState } from 'react';
@@ -37,6 +37,8 @@ export function App() {
         return(<RedditFetcher />);
       case Page.AboutMe:
         return(<AboutMe />);
+      case Page.Picture:
+        return(<Picture />);
       default:
         console.error("Page selected not found.");
         return;
