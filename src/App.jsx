@@ -2,7 +2,7 @@
 import './App.css';
 import { ConsoleWindow, Personal, Projects, Backlogger, RedditFetcher, AboutMe, Picture, Root } from './components/Exports';
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   createRoutesFromElements,
   Route
@@ -10,7 +10,7 @@ import {
 
 // TODO: Convert this back to .tsx (requires some custom event class jank)
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route element={<ConsoleWindow />}>
       <Route path="/" element={<Root />} />

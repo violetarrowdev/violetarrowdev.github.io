@@ -1,5 +1,5 @@
-import { Root, Banner } from './Exports';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Banner } from './Exports';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as Constants from '../util/Constants';
 
