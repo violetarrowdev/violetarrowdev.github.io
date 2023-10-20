@@ -1,4 +1,4 @@
-import { changePage, Page } from '../util/Pages';
+import { changePage } from '../util/Pages';
 import { Console } from './Exports';
 
 export default function Personal() {
@@ -7,9 +7,9 @@ export default function Personal() {
             <p><Console fullText="personal/" /></p>
 
             <ul>
-                <li><button type="button" onClick={() => changePage(Page.AboutMe)}><Console fullText="> aboutme.txt" /></button></li>
-                <li><button type="button" onClick={() => changePage(Page.Picture)} ><Console fullText="> picture.jpg" /></button></li>
-                <li><button type="button" onClick={() => changePage(Page.Root)} ><Console fullText="> .." /></button></li>
+                <li><button type="button" onClick={() => changePage("./about-me")}><Console fullText="> aboutme.txt" /></button></li>
+                <li><button type="button" onClick={() => changePage("./picture")} ><Console fullText="> picture.jpg" /></button></li>
+                <li><button type="button" onClick={() => changePage("..")} ><Console fullText="> .." /></button></li>
             </ul>
         </div>
     )

@@ -1,4 +1,4 @@
-import { changePage, Page } from '../util/Pages';
+import { changePage } from '../util/Pages';
 import { Console } from './Exports';
 
 export default function Backlogger() {
@@ -18,7 +18,7 @@ export default function Backlogger() {
                 <Console textInterval={10} swipeInterval={2} noDelay={true} fullText="here" /></a>
             <Console textInterval={10} swipeInterval={2} noDelay={true} fullText=". when the app is finished, i'll add a section with more details on this site! stay tuned." /></p>
             <ul>
-                <li><button type="button" onClick={() => changePage(Page.Projects)} ><Console fullText="> .." /></button></li>
+                <li><button type="button" onClick={() => changePage("..")} ><Console fullText="> .." /></button></li>
             </ul>
         </div>
     )

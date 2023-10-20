@@ -1,4 +1,4 @@
-import { changePage, Page } from '../util/Pages';
+import { changePage } from '../util/Pages';
 import { Console } from './Exports';
 
 export default function AboutMe() {
@@ -24,7 +24,7 @@ export default function AboutMe() {
             <p><Console textInterval={10} swipeInterval={2} fullText="thanks for reading. take it easy, traveler." /></p>
 
             <ul>
-                <li><button type="button" onClick={() => changePage(Page.Personal)} ><Console fullText="> .." /></button></li>
+                <li><button type="button" onClick={() => changePage("..")} ><Console fullText="> .." /></button></li>
             </ul>
         </div>
     )

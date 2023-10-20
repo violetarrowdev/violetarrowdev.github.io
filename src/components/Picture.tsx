@@ -1,4 +1,4 @@
-import { changePage, Page } from '../util/Pages';
+import { changePage } from '../util/Pages';
 import { Console, Asciinator } from './Exports'
 
 export default function Picture() {
@@ -6,7 +6,7 @@ export default function Picture() {
         <div>
             <Asciinator imageRef="/images/test.jpg" />
             <ul>
-                <li><button type="button" onClick={() => changePage(Page.Personal)} ><Console fullText="> .." /></button></li>
+                <li><button type="button" onClick={() => changePage("..")} ><Console fullText="> .." /></button></li>
             </ul>
         </div>
     )

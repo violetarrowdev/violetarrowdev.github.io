@@ -8,6 +8,7 @@ import RedditFetcher from './RedditFetcher'
 import AboutMe from './AboutMe'
 import Asciinator from './Asciinator'
 import Picture from './Picture'
+import ConsoleWindow from './ConsoleWindow'
 
 export {
     Banner,
@@ -19,5 +20,6 @@ export {
     RedditFetcher,
     AboutMe,
     Asciinator,
-    Picture
+    Picture,
+    ConsoleWindow
 }
