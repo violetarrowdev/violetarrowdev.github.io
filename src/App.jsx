@@ -16,7 +16,6 @@ const router = createHashRouter(
       <Route path="/" element={<Root />} />
       <Route path="projects" element={<Projects />} />
       <Route path="projects/backlogger" element={<Backlogger />} />
-      <Route path="projects/reddit-fetcher" element={<RedditFetcher />} /> 
       <Route path="personal" element={<Personal />} />
       <Route path="personal/about-me" element={<AboutMe />} />
       <Route path="personal/picture" element={<Picture />} />

@@ -4,7 +4,6 @@ import Personal from './Personal'
 import Projects from './Projects'
 import Root from './Root'
 import Backlogger from './Backlogger'
-import RedditFetcher from './RedditFetcher'
 import AboutMe from './AboutMe'
 import Asciinator from './Asciinator'
 import Picture from './Picture'
@@ -17,7 +16,6 @@ export {
     Root,
     Console,
     Backlogger,
-    RedditFetcher,
     AboutMe,
     Asciinator,
     Picture,

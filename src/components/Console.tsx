@@ -56,7 +56,7 @@ export default class Console extends Component<ConsoleProps, ConsoleState> {
         swipeInterval: PropTypes.number.isRequired,
         noDelay: PropTypes.bool,
         isDynamic: PropTypes.bool,
-        charsPerLoop: PropTypes.number.isRequired,
+        charsPerLoop: PropTypes.number,
         fullText: PropTypes.string.isRequired
     };
 

@@ -9,16 +9,20 @@ enum QueueState {
     Pause
 }
 
+// TODO: This needs to be a component to integrate properly with react router.
+
 /**
  * Singleton class that handles animating console windows according to the order they mount to the window. 
  * Functions as a finite state machine with three modes: forward, clear, and pause.
  */
 export default class ConsoleManager {
+
     private consoleQueue: Array<Console>;
     private queueIndex: number = 0;
     private queueState: QueueState = QueueState.Pause;
     private animationsInProgress: number = 0;
     private delayedAnim: NodeJS.Timer | null = null;
+    private forceCleared: boolean = true;
 
     constructor(consoleQueue: Array<Console> | null = null) {
         if (consoleQueue === null) {
@@ -59,6 +63,11 @@ export default class ConsoleManager {
                     this.animateNext();
                     this.queueIndex++;
                 }
+                // DEBUG:
+                if (index == queueSize - 1 && animCount == 0) {
+                    console.log("Anims complete");
+                }
+
                 break;
             }
 
@@ -71,6 +80,7 @@ export default class ConsoleManager {
                     this.animationsInProgress--;
                     animCount--;
                     if (index === 0) {
+                        this.forceCleared = false;
                         window.dispatchEvent(new Event(Constants.consolesClearedEvent));
                         this.continueText();
                         return;
@@ -131,7 +141,9 @@ export default class ConsoleManager {
         if (this.delayedAnim !== null) {
             clearTimeout(this.delayedAnim);
             this.delayedAnim = null;
-            this.animationsInProgress--;
+            if (this.animationsInProgress > 0) { // avoids issues on forced reload or page change
+                this.animationsInProgress--;
+            }
             this.queueIndex--;
         }
         this.proceed()
@@ -206,5 +218,17 @@ export default class ConsoleManager {
                 this.delayedAnim = setTimeout(animation, delayInterval);
             }
         }
+    }
+
+    checkForceClear(): void {
+        if (this.forceCleared) {
+            console.log("Potential force clear detected, if this is not your first time loading the page, it may require a hard refresh (Shift-F5)")
+        } else {
+            this.forceCleared = true;
+        }
+        // this.queueIndex = 0;
+        // this.animationsInProgress = 0;
+        // this.queueState = QueueState.Pause;
+        // this.continueText();
     }
 }

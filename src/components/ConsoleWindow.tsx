@@ -1,11 +1,13 @@
 import { Banner } from './Exports';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as Constants from '../util/Constants';
+import ConsoleManager from '../controller/ConsoleManager'
 
 export default function ConsoleWindow() {
 
     const navigate = useNavigate();
+    const location = useLocation();
     const [nextPage, setNextPage] = useState("/");
 
     useEffect(() => {
@@ -17,9 +19,18 @@ export default function ConsoleWindow() {
             setNextPage(ev.detail.nextPage);
           }
 
-        window.addEventListener(Constants.consolesClearedEvent, switchPage)
-        window.addEventListener(Constants.pageTransitionEvent, prepareTransition)
+        window.addEventListener(Constants.consolesClearedEvent, switchPage);
+        window.addEventListener(Constants.pageTransitionEvent, prepareTransition);
+
+        return () => {
+            window.removeEventListener(Constants.consolesClearedEvent, switchPage);
+            window.removeEventListener(Constants.pageTransitionEvent, prepareTransition);
+        };
     }, [navigate, nextPage])
+
+    useEffect(() => {
+        ConsoleManager.getInstance().checkForceClear();
+    }, [location.pathname])
 
     return (
         <body>
