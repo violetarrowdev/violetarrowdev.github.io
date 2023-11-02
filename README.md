@@ -8,8 +8,8 @@ At present moment, the site has two main features: the console-esque page flow, 
 
 # To-Do
 
-* Different pages of the site should have their own url path associated with them so they can be accessed directly
+* ~~Different pages of the site should have their own url path associated with them so they can be accessed directly~~
 * Get rid of the annoying linebreak "overflow" on the right hand side for the Asciinator (probably due to whitespace preformatting)
 * Image compression/autoscaling should be done automatically on git push or build instead of manually
-* Add a way for users to asciinate their own images on the site. Why not!
-* Add blurb for the Reddit Fetcher
+* Add a way for users to asciinate their own images on the site
+* Back/forward buttons can cause glitching when done mid-animation, fix in progress
